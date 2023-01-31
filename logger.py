@@ -81,20 +81,32 @@ def put_data():
         var = int(input("Ещё один шанс! Ваш выбор: "))
 
     if var == 1:
-        with open('data_first_variant.csv', 'r', encoding = 'utf-8') as file:
+        with open('data_first_variant.csv', 'w', encoding = 'utf-8') as file:
             n = int(input('\n Какой номер записи Вы хотите изменить: '))
-            records = file.readlines()
-            records_2 = []
+            data_first = file.readlines()
+            data_first_2 = []
             
-            for i in range(len(records)):
-                if records[i] != '\n' or i != n:
-                    records_2.append()
+            for i in range(len(data_first)):
+                if data_first[i] != '\n' or i == n:
+                    data_first = data_first[:n] + [f'{name}\n{surname}\n{phone}\n{adress}\n'] + data_first[n+1:]
+                    data_first_2.append(''.join(data_first[i]))
+
+            file.write(data_first)
                     
     else:
-        with open('data_second_variant.csv', 'a', encoding = 'utf-8') as file:
-            file.write(f'{name};{surname};{phone};{adress}\n\n')
+        with open('data_second_variant.csv', 'w', encoding = 'utf-8') as file:
+            n = int(input('Какой номер записи Вы хотите изменить: '))
+            data_second = list(file.readlines)
+            data_second_2 = []
+            for i in range(len(data_second)):
+                if i == n:
+                    data_second = data_second[:n] + [f'{name};{surname};{phone};{adress}'] + data_second[n+1:]
+                    data_second_2.append(''.join(data_second[i]))
 
-    data_first = data_first[:n] + [f'{name}\n{surname}\n{phone}\n{adress}\n'] + data_first[n+1:]
+            file.write(data_second)
+
+
+    
 
 
 def delete_data():

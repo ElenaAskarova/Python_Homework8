@@ -137,4 +137,68 @@ def put_data():
              
   
 def delete_data():
-    pass
+    name = name_data()
+    surname = surname_data()
+    phone = phone_data()
+    adress = adress_data()
+    var = int(input(f"В каком варианте Вы хотите удалить данные данные?\n\n"
+                    f"1 Вариант‚:\n"
+                    f"{name}\n"
+                    f"{surname}\n"
+                    f"{phone}\n"
+                    f"{adress}\n\n"
+                    f"2 Вариант‚:\n"
+                    f"{name};{surname};{phone};{adress}\n\n"
+                    f"Выберите номер варианта: "))
+
+    while var != 1 and var != 2:
+        var = int(input("Ещё один шанс! Ваш выбор: "))
+
+    if var == 1:
+        print_data()
+        with open('data_first_variant.csv', 'r', encoding = 'utf-8') as file:
+            n = int(input('Под каким номером запись Вы хотите удалить: '))
+            data_first = file.readlines()
+            data_first_2 = []
+            a = 1
+            i = 0
+            while i < len(data_first):
+                if a != n:
+                    if data_first[i] != '\n':
+                        data_first_2.append(f'{data_first[i]}')
+                        i += 1
+                    else:
+                        data_first_2.append('\n')
+                        a += 1
+                        i += 1
+                else:
+                    a += 1
+                    i += 5
+        with open('data_first_variant.csv', 'w', encoding = 'utf-8') as file:
+            for i in data_first_2:
+                file.write(i)
+
+    else:
+        print_data()
+        with open('data_second_variant.csv', 'r', encoding = 'utf-8') as file:
+            n = int(input('Под каким номером запись Вы хотите удалить: '))
+            data_second = file.readlines()
+            data_second_2 = []
+            a = 1
+            i = 0
+            while i < len(data_second):
+                if a != n:
+                    if data_second[i] != '\n':
+                        data_second_2.append(f'{data_second[i]}')
+                        i += 1
+                    else:
+                        data_second_2.append('\n')
+                        a += 1
+                        i += 1
+                else:
+                    a += 1
+                    i += 1
+
+        with open('data_second_variant.csv', 'w', encoding = 'utf-8') as file:
+            for i in data_second_2:
+                file.write(i)
